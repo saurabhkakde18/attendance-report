@@ -36,7 +36,7 @@ export const AttendanceMonitor: React.FC<AttendanceMonitorProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center space-x-3">
+        <div className="flex flex-wrap items-center gap-2">
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}

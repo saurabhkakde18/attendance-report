@@ -14,6 +14,7 @@ import {
   KeyRound,
   Lock,
   Download,
+  Menu,
 } from 'lucide-react';
 import {
   BUCKET_SALARY_SLIPS,
@@ -30,6 +31,7 @@ interface NavbarProps {
   adminEmail?: string;
   currentAdminPassword?: string;
   onAdminChangePassword?: (newPass: string) => boolean | void;
+  onToggleMobileSidebar?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -38,6 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   adminEmail = 'admin@enterprise.com',
   currentAdminPassword = 'admin123',
   onAdminChangePassword,
+  onToggleMobileSidebar,
 }) => {
   const [showSupabaseModal, setShowSupabaseModal] = useState(false);
   const [showChangePassModal, setShowChangePassModal] = useState(false);
@@ -104,11 +107,20 @@ export const Navbar: React.FC<NavbarProps> = ({
   const configured = isSupabaseConfigured();
 
   return (
-    <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between shrink-0">
-      <div className="flex items-center space-x-4">
-        <div>
-          <h2 className="text-lg font-bold text-slate-800">{currentTabName}</h2>
-          <p className="text-xs text-slate-500">
+    <header className="h-16 bg-white border-b border-slate-200 px-3 sm:px-6 flex items-center justify-between shrink-0">
+      <div className="flex items-center space-x-2 sm:space-x-4 min-w-0">
+        {/* Hamburger Menu Toggle for Mobile */}
+        <button
+          onClick={onToggleMobileSidebar}
+          className="p-2 -ml-1 rounded-xl text-slate-700 hover:bg-slate-100 md:hidden transition-colors shrink-0 border border-slate-200"
+          title="Toggle Navigation Menu"
+        >
+          <Menu className="w-5 h-5 text-slate-700" />
+        </button>
+
+        <div className="min-w-0">
+          <h2 className="text-base sm:text-lg font-bold text-slate-800 truncate">{currentTabName}</h2>
+          <p className="text-[11px] sm:text-xs text-slate-500 truncate hidden xs:block">
             OMSAIRAM GPS Geofence & Statutory Payroll Engine • Asia/Kolkata (IST)
           </p>
         </div>

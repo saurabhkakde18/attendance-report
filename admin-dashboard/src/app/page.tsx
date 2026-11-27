@@ -66,6 +66,7 @@ export default function Home() {
 
   // Active Admin View Tab
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // Application Real State
   const [employees, setEmployees] = useState<Employee[]>(INITIAL_EMPLOYEES);
@@ -719,26 +720,29 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen bg-slate-50 overflow-hidden">
-      {/* Left Navigation Sidebar */}
+    <div className="flex h-screen bg-slate-50 overflow-hidden relative">
+      {/* Navigation Sidebar (Slide-over drawer on mobile, fixed on desktop) */}
       <Sidebar
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
         onLogout={handleLogout}
         onSwitchToEmployeeView={() => setUserRole('EMPLOYEE')}
+        isOpen={mobileSidebarOpen}
+        onClose={() => setMobileSidebarOpen(false)}
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col h-screen overflow-hidden min-w-0">
         {/* Top Header Navbar */}
         <Navbar
           currentTabName={tabTitles[currentTab] || 'Dashboard'}
           currentAdminPassword={currentAdminPass}
           onAdminChangePassword={handleAdminChangePassword}
+          onToggleMobileSidebar={() => setMobileSidebarOpen(!mobileSidebarOpen)}
         />
 
         {/* Scrollable Module Canvas */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className="flex-1 p-3 sm:p-6 overflow-y-auto overflow-x-hidden">
           {currentTab === 'dashboard' && (
             <DashboardOverview
               employees={employees}

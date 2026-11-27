@@ -34,3 +34,7 @@ local.properties
 *.swo
 .DS_Store
 Thumbs.db
+
+# Build Tools & Standalone Build Cache
+tools/
+standalone-apk-build/

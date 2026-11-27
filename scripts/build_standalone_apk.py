@@ -145,7 +145,8 @@ public class MainActivity extends Activity {
         settings.setDisplayZoomControls(false);
         settings.setSupportZoom(false);
         settings.setUseWideViewPort(true);
-        settings.setLoadWithOverviewMode(true);
+        settings.setLoadWithOverviewMode(false);
+        settings.setTextZoom(100);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
 
         mWebView.setWebChromeClient(new WebChromeClient() {
